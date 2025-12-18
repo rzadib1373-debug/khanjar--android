@@ -1,32 +1,20 @@
-name: Build Khanjar APK
+[app]
+title = Khanjar
+package.name = khanjar
+package.domain = org.khanjar
 
-on:
-  push:
-    branches: [ "main" ]
+source.dir = .
+source.include_exts = py
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+version = 1.0
 
-    steps:
-    - uses: actions/checkout@v4
+requirements = python3,kivy,requests,numpy
 
-    - name: Install system deps
-      run: |
-        sudo apt update
-        sudo apt install -y zip unzip openjdk-17-jdk python3-pip git
+orientation = portrait
+fullscreen = 0
 
-    - name: Install buildozer
-      run: |
-        pip install --upgrade pip
-        pip install buildozer cython
+android.permissions = INTERNET
+android.api = 33
+android.minapi = 23
+android.ndk = 25b
 
-    - name: Build APK
-      run: |
-        buildozer android debug
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: khanjar-apk
-        path: bin/*.apk
