@@ -1,0 +1,1 @@
+Unzip, replace khanjar_engine.py content, push to GitHub, build APK via Actions.
